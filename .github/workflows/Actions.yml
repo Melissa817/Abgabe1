@@ -1,45 +1,29 @@
-
 name: HTTP Status Check
 
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 jobs:
-  # This workflow contains a job that checks HTTP status
   check_http_status:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v2
 
-      # Run a one-line script to greet
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Run a multi-line script
-      - name: Run a multi-line script
+      - name: Check URL Status
         run: |
-          echo "Add other actions to build,"
-          echo "test, and deploy your project."
+          response=$(curl -o /dev/null -s -w "%{http_code}\n" https://httpstat.us/200)
+          echo "HTTP Status Code: $response"
+          if [ "$response" -ne 200 ]; then
+            echo "Unexpected HTTP status code. Expected 200."
+            exit 1
+          fi
+          echo "The website returned the expected 200 status code."
 
-   # Check the HTTP status of a URL
-- name: Check URL Status
-  run: |
-    response=$(curl -o /dev/null -s -w "%{http_code}\n" https://httpstat.us/200)
-    echo "HTTP Status Code: $response"
-    if [ "$response" -ne 200 ]; then
-      echo "Unexpected HTTP status code. Expected 200."
-      exit 1
-    fi
-    echo "The website returned the expected 200 status code."
 
 
