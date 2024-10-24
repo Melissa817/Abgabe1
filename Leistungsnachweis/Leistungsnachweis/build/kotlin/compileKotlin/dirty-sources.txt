@@ -1,0 +1,4 @@
+C:\Leistungsnachweis\Leistungsnachweis\src\main\java\org\example\Rohdaten.kt
+C:\Leistungsnachweis\Leistungsnachweis\src\main\java\org\example\sendAggregatedDaata.kt
+C:\Leistungsnachweis\Leistungsnachweis\src\main\java\org\example\Main.kt
+C:\Leistungsnachweis\Leistungsnachweis\src\main\java\org\example\AggregateData.kt

@@ -1,0 +1,13 @@
+version: '3'
+services:
+  assessment:
+    image: mrksdh/assessment
+    ports:
+      - "8080:8080"
+
+  app:
+    build: .
+    depends_on:
+      - assessment
+    environment:
+      - API_URL=http://assessment:8080/data
